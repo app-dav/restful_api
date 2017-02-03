@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
+using Notes.Interfaces;
 using System.Net.Http;
 using System.Web.Http;
 
@@ -9,19 +9,34 @@ namespace Notes.Api.Controllers
 {
     public class NotesController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        [HttpGet]
+        [Route("notes")]
+        public IEnumerable<INote> Get()
         {
-            return new string[] { "value1", "value2" };
+            return ServiceProxy.GetNotes();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("notes/{id}")]
+        public INote Get(int id)
         {
-            return "value";
+            var result = ServiceProxy.GetNote(id);
+
+            if (result == null)
+                throw new HttpResponseException(System.Net.HttpStatusCode.NotFound);
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("notes/searchTerm")]
+        public IEnumerable<INote> Get(string searchTerm)
+        {
+            return ServiceProxy.SearchNotes(searchTerm);
         }
 
         // POST api/<controller>
+        [HttpPost]
         public void Post([FromBody]string value)
         {
         }

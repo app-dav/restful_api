@@ -12,7 +12,7 @@ namespace Notes.Repository
             _container.RegisterType<IRepository, Repository>();
         }
 
-        static IRepository GetRepository()
+        public static IRepository GetRepository()
         {
             return _container.Resolve<IRepository>();
         }

@@ -16,22 +16,31 @@ namespace Notes.Domain
     {
         public INote GetNote(int Id)
         {
-            throw new NotImplementedException();
+            var repo = GetRepository();
+            return repo.Get(Id);
         }
 
         public IEnumerable<INote> GetNotes()
         {
-            throw new NotImplementedException();
+            var repo = GetRepository();
+            return repo.Get();
         }
 
         public IEnumerable<INote> SearchNotes(string searchTerm)
         {
-            throw new NotImplementedException();
+            var repo = GetRepository();
+            return repo.Search(searchTerm);
         }
 
         public void SaveNote(INote newNote)
         {
-            throw new NotImplementedException();
+            var repo = GetRepository();
+            repo.Save(newNote);
+        }
+
+        IRepository GetRepository()
+        {
+            return Repository.RepositoryFactory.GetRepository();
         }
 
     }
