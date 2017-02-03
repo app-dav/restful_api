@@ -99,7 +99,7 @@ namespace Notes.Repository
 
         protected internal IEnumerable<Interfaces.Note> SearchNotes(string searchTerm, LiteCollection<Interfaces.Note> notes)
         {
-            return string.IsNullOrEmpty(searchTerm) ? new List<Interfaces.Note>() : notes.Find(n => n.body.Contains(searchTerm));
+            return string.IsNullOrEmpty(searchTerm.Trim()) ? new List<Interfaces.Note>() : notes.Find(n => n.body.Contains(searchTerm));
         }
 
     }

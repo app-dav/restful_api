@@ -91,6 +91,82 @@ namespace Notes.Repository.Test
         }
 
         [TestMethod]
+        public void IntegrationTestSearch()
+        {
+            Cleanup();
+            var repo = new Repository(null);
+            var note = GetNoteForTest();
+            string search_term = "the Walrus said";
+
+            try
+            {
+                using (var db = new LiteDatabase(db_name))
+                {
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
+                    notes.Insert(note);
+                    note.body = $"this is a test Note2. I am going to add our searchterm {search_term} here.";
+                    note.id = 2;
+                    notes.Insert(note);
+                }
+
+                using (var db = new LiteDatabase(db_name))
+                {
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
+                    var searchedForNote = repo.SearchNotes(search_term, notes);
+
+                    Assert.IsTrue(searchedForNote.Count() == 1, $"Db note count {searchedForNote.Count()}");
+                    var noted = searchedForNote.First();
+                    Assert.IsTrue(noted.id == note.id && noted.body == note.body, "Note is not in collection");
+                }
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [TestMethod]
+        public void IntegrationTestSearchWithASpaceForSeearchString()
+        {
+            Cleanup();
+            var repo = new Repository(null);
+            var note = GetNoteForTest();
+            string search_term = " ";
+
+            try
+            {
+                using (var db = new LiteDatabase(db_name))
+                {
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
+                    notes.Insert(note);
+                    note.body = $"this is a test Note2. I am going to add our searchterm {search_term} here.";
+                    note.id = 2;
+                    notes.Insert(note);
+                }
+
+                using (var db = new LiteDatabase(db_name))
+                {
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
+                    var searchedForNote = repo.SearchNotes(search_term, notes);
+
+                    Assert.IsTrue(searchedForNote.Count() == 0, $"Db note count {searchedForNote.Count()}");
+                }
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(e.Message);
+            }
+            finally
+            {
+                Cleanup();
+            }
+        }
+
+        [TestMethod]
         public void IntegrationTestGetAll()
         {
             Cleanup();
