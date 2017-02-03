@@ -12,7 +12,7 @@ namespace Notes.Domain
     /// but an app this small, and a layer this light,
     /// it would be a bit of overkill, I think
     /// </summary>
-    public class NoteService
+    public class NoteService : INoteService
     {
         public INote GetNote(int Id)
         {
