@@ -30,7 +30,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     Assert.IsTrue(notes.Count() == 0, "Db is not empty");
                     note.id = null;
 
@@ -39,7 +39,7 @@ namespace Notes.Repository.Test
 
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     Assert.IsTrue(notes.Count() == 1, "Db note count 1");
                     Assert.IsTrue(notes.Exists(x => x.id == 1 && x.body == note.body), "Note is not in collection");
                 }
@@ -65,7 +65,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     notes.Insert(note);
                     Assert.IsTrue(notes.Count() == 1, "Note is not inserted");
 
@@ -75,7 +75,7 @@ namespace Notes.Repository.Test
 
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     Assert.IsTrue(notes.Count() == 1, "Db note count 1");
                     Assert.IsTrue(notes.Exists(x => x.id == note.id && x.body == note.body), "Note is not in collection");
                 }
@@ -101,7 +101,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     notes.Insert(note);
 
                     note.body = "this is a test Note2";
@@ -112,7 +112,7 @@ namespace Notes.Repository.Test
 
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     var all = repo.Get(null, notes);
                     Assert.IsTrue(all.Count() == notes.Count(), "Db note count note the same");
                 }
@@ -138,7 +138,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     var all = repo.Get(null, notes);
                     Assert.IsNotNull(all, "getAll returned null");
                     Assert.IsTrue(all.Count() == 0, "Db note not zero");
@@ -166,14 +166,14 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     notes.Insert(note);
                     Assert.IsTrue(notes.Count() == 1, "Note is not inserted");
                 }
 
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     var retrievedNote = repo.Get(note.id.Value, notes).First();
                     Assert.IsTrue(retrievedNote.id == note.id && retrievedNote.body == note.body, "Note is not in collection");
                 }
@@ -199,7 +199,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     var retrievedNote = repo.Get(note.id.Value, notes);
                     Assert.IsTrue(retrievedNote.Count() == 0, "should return empty");
                 }
@@ -225,7 +225,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     var result = repo.GetNextId(notes);
 
                     Assert.AreEqual(1, result);
@@ -252,7 +252,7 @@ namespace Notes.Repository.Test
             {
                 using (var db = new LiteDatabase(db_name))
                 {
-                    var notes = db.GetCollection<INote>(collection_name);
+                    var notes = db.GetCollection<Interfaces.Note>(collection_name);
                     notes.Insert(note);
 
                     var result = repo.GetNextId(notes);
@@ -270,7 +270,7 @@ namespace Notes.Repository.Test
             }
         }
 
-        INote GetNoteForTest()
+        Note GetNoteForTest()
         {
             return new Note() { id = 1, body = "this is a test Note" };
         }

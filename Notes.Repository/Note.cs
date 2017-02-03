@@ -1,6 +1,6 @@
 ﻿namespace Notes.Repository
 {
-    public class Note : Notes.Interfaces.INote
+    public class Note : Notes.Interfaces.Note
     {
         
         public string body

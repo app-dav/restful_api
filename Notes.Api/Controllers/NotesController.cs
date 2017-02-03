@@ -11,14 +11,14 @@ namespace Notes.Api.Controllers
     {
         [HttpGet]
         [Route("notes")]
-        public IEnumerable<INote> Get()
+        public IEnumerable<Note> Get()
         {
             return ServiceProxy.GetNotes();
         }
 
         [HttpGet]
         [Route("notes/{id}")]
-        public INote Get(int id)
+        public Note Get(int id)
         {
             var result = ServiceProxy.GetNote(id);
 
@@ -29,16 +29,27 @@ namespace Notes.Api.Controllers
         }
 
         [HttpGet]
-        [Route("notes/searchTerm")]
-        public IEnumerable<INote> Get(string searchTerm)
+        [Route("notes")]
+        public IEnumerable<Note> Get(string query)
         {
-            return ServiceProxy.SearchNotes(searchTerm);
+            return ServiceProxy.SearchNotes(query);
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        [Route("notes")]
+        public HttpResponseMessage Post([FromBody]Note note)
         {
+            try
+            {
+                ServiceProxy.SaveNote(note);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            
         }
 
     }

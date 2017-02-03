@@ -14,25 +14,25 @@ namespace Notes.Domain
     /// </summary>
     public class NoteService : INoteService
     {
-        public INote GetNote(int Id)
+        public Note GetNote(int Id)
         {
             var repo = GetRepository();
             return repo.Get(Id);
         }
 
-        public IEnumerable<INote> GetNotes()
+        public IEnumerable<Note> GetNotes()
         {
             var repo = GetRepository();
             return repo.Get();
         }
 
-        public IEnumerable<INote> SearchNotes(string searchTerm)
+        public IEnumerable<Note> SearchNotes(string searchTerm)
         {
             var repo = GetRepository();
             return repo.Search(searchTerm);
         }
 
-        public void SaveNote(INote newNote)
+        public void SaveNote(Note newNote)
         {
             var repo = GetRepository();
             repo.Save(newNote);
