@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{77F748BC-7A4F-49D7-A25F-D0FAAC5AC07B}</ProjectGuid>
+    <ProjectGuid>{DA76BDFB-8D4D-4188-BAC8-F30657CC4D0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Notes.Interfaces</RootNamespace>
-    <AssemblyName>Notes.Interfaces</AssemblyName>
+    <RootNamespace>Notes.Domain</RootNamespace>
+    <AssemblyName>Notes.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="INote.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="NoteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Notes.Interfaces\Notes.Interfaces.csproj">
+      <Project>{77f748bc-7a4f-49d7-a25f-d0faac5ac07b}</Project>
+      <Name>Notes.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Notes.Repository\Notes.Repository.csproj">
+      <Project>{930fe4b0-358c-4168-bdae-e057708b7cd4}</Project>
+      <Name>Notes.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

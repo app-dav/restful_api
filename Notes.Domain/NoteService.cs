@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Notes.Interfaces;
 using System.Threading.Tasks;
 
 
-namespace Notes.Repository
+namespace Notes.Domain
 {
     /// <summary>
     /// Normally, this would be in an assembly of it's own (aka a business layer),
@@ -14,22 +14,22 @@ namespace Notes.Repository
     /// </summary>
     public class NoteService
     {
-        public Note GetNote(int Id)
+        public INote GetNote(int Id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Note> GetNotes()
+        public IEnumerable<INote> GetNotes()
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Note> SearchNotes(string searchTerm)
+        public IEnumerable<INote> SearchNotes(string searchTerm)
         {
             throw new NotImplementedException();
         }
 
-        public void SaveNote(Note newNote)
+        public void SaveNote(INote newNote)
         {
             throw new NotImplementedException();
         }

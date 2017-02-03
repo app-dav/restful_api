@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Notes.Repository
 {
-    public class Note 
+    public class Note : Notes.Interfaces.INote
     {
         
         public string body
