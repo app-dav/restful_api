@@ -43,7 +43,7 @@ namespace Notes.Api.Controllers
             try
             {
                 ServiceProxy.SaveNote(note);
-                return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
+                return new HttpResponseMessage(System.Net.HttpStatusCode.Created);
             }
             catch (Exception e)
             {

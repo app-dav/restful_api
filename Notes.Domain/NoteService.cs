@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace Notes.Domain
 {
     /// <summary>
-    /// Normally, this would be in an assembly of it's own (aka a business layer),
-    /// but an app this small, and a layer this light,
-    /// it would be a bit of overkill, I think
+    /// 
+    /// This layer is overkill in this app, isn't it
+    ///                                     
     /// </summary>
     public class NoteService : INoteService
     {

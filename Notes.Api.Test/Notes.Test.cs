@@ -2,6 +2,7 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Notes.Api;
 
 namespace Notes.Api.Test
 {
@@ -59,11 +60,9 @@ namespace Notes.Api.Test
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void IntegrationTestGetAll()
         {
-            //
-            // TODO: Add test logic here
-            //
+            
         }
     }
 }
